@@ -24,3 +24,9 @@ class Authentication {
   Contacts? contacts;
   Authentication(this.customer, this.contacts);
 }
+
+// .. Forgot Password
+class ForgotPassword {
+  String support;
+  ForgotPassword(this.support);
+}

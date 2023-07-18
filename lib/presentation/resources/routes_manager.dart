@@ -1,5 +1,5 @@
 import 'package:advanced_clean_architecture_with_mvvm/app/di.dart';
-import 'package:advanced_clean_architecture_with_mvvm/presentation/forgot_password/forgot_password.dart';
+import 'package:advanced_clean_architecture_with_mvvm/presentation/forgot_password/view/forgot_password.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/login/view/login.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/main/main.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/onboarding/view/onboarding_view.dart';
@@ -36,6 +36,7 @@ class RoutesGenerator {
         return MaterialPageRoute(builder: (context) => const OnboardingView());
 
       case Routes.forgotPasswordRoute:
+        initForgotPasswordModule();
         return MaterialPageRoute(
             builder: (context) => const ForgotPasswordView());
 
