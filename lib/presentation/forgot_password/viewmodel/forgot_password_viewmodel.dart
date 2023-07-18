@@ -5,7 +5,6 @@ import 'package:advanced_clean_architecture_with_mvvm/domain/usecase/forgot_pass
 import 'package:advanced_clean_architecture_with_mvvm/presentation/base/base_view_model.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/common/state_renderer/state_renderer.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/common/state_renderer/state_renderer_impl.dart';
-import 'package:advanced_clean_architecture_with_mvvm/presentation/resources/strings_manager.dart';
 
 class ForgotPasswordViewModel extends BaseViewModel
     with ForgotPasswordViewModelInputs, ForgotPasswordViewModelOutputs {

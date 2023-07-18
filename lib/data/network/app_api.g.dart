@@ -29,7 +29,7 @@ class _AppServiceClient implements AppServiceClient {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
-      'email': email,
+      'email ': email,
       'password': password,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -77,6 +77,47 @@ class _AppServiceClient implements AppServiceClient {
               baseUrl,
             ))));
     final value = ForgotPasswordResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AuthenticationResponse> register(
+    String userName,
+    String countryMobileCode,
+    String mobileNumber,
+    String email,
+    String password,
+    String profilePicture,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_name': userName,
+      'country_mobile_code': countryMobileCode,
+      'mobile_number': mobileNumber,
+      'email': email,
+      'password': password,
+      'profile_picture': profilePicture,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AuthenticationResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/customers/register',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = AuthenticationResponse.fromJson(_result.data!);
     return value;
   }
 

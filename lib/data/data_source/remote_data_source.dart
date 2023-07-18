@@ -5,6 +5,7 @@ import 'package:advanced_clean_architecture_with_mvvm/data/response/responses.da
 abstract class RemoteDataSource {
   Future<AuthenticationResponse> login(LoginRequest loginRequest);
   Future<ForgotPasswordResponse> forgotPassword(String email);
+  Future<AuthenticationResponse> register(RegisterRequest registerRequest);
 }
 
 // .. implementation (Impl)
@@ -21,5 +22,18 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<ForgotPasswordResponse> forgotPassword(String email) async {
     return await _appServiceClient.forgotPasswordView(email);
+  }
+
+  @override
+  Future<AuthenticationResponse> register(
+      RegisterRequest registerRequest) async {
+    return await _appServiceClient.register(
+      registerRequest.userName,
+      registerRequest.countryMobileCode,
+      registerRequest.mobileNumber,
+      registerRequest.email,
+      registerRequest.password,
+      registerRequest.profilePicture,
+    );
   }
 }
