@@ -3,7 +3,7 @@ import 'package:advanced_clean_architecture_with_mvvm/presentation/forgot_passwo
 import 'package:advanced_clean_architecture_with_mvvm/presentation/login/view/login.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/main/main.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/onboarding/view/onboarding_view.dart';
-import 'package:advanced_clean_architecture_with_mvvm/presentation/register/register.dart';
+import 'package:advanced_clean_architecture_with_mvvm/presentation/register/view/register.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/resources/strings_manager.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/splash/splash.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/store_details/store_details.dart';

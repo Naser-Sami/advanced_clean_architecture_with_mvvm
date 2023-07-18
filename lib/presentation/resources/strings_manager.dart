@@ -29,7 +29,10 @@ class AppStrings {
   static const String retryAgain = "Retry again";
   static const String ok = "Ok";
   static const String emailHint = 'Email';
-  static const String invalidEmail = "Invalid Email";
+  static const String invalidEmail = "Email format is wrong";
   static const String resetPassword = "Reset Password";
   static const String success = "Success";
+  static const String userNameInvalid = "User name should be at least 8 chars";
+  static const String mobileNumberInvalid = "Mobile Number should be at least 10 digits";
+  static const String passwordInvalid = "Password should be at least 6 digits";
 }
