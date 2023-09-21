@@ -7,10 +7,13 @@ import 'package:advanced_clean_architecture_with_mvvm/data/repository/repository
 import 'package:advanced_clean_architecture_with_mvvm/domain/repository/repository.dart';
 import 'package:advanced_clean_architecture_with_mvvm/domain/usecase/forgot_password_usecase.dart';
 import 'package:advanced_clean_architecture_with_mvvm/domain/usecase/login_usecase.dart';
+import 'package:advanced_clean_architecture_with_mvvm/domain/usecase/register_usecase.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/forgot_password/viewmodel/forgot_password_viewmodel.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/login/viewmodel/login_viewmodel.dart';
+import 'package:advanced_clean_architecture_with_mvvm/presentation/register/viewmodel/register_viewmodel.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,5 +69,16 @@ initForgotPasswordModule() {
         () => ForgotPasswordUsecase(instance<Repository>()));
     instance.registerFactory<ForgotPasswordViewModel>(
         () => ForgotPasswordViewModel(instance<ForgotPasswordUsecase>()));
+  }
+}
+
+initRegisterModule() {
+  if (!GetIt.I.isRegistered<RegisterUseCase>()) {
+    instance.registerFactory<RegisterUseCase>(
+        () => RegisterUseCase(instance<Repository>()));
+    instance.registerFactory<RegisterViewModel>(
+        () => RegisterViewModel(instance<RegisterUseCase>()));
+
+    instance.registerFactory<ImagePicker>(() => ImagePicker());
   }
 }

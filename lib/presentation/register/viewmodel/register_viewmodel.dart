@@ -5,6 +5,8 @@ import 'package:advanced_clean_architecture_with_mvvm/app/functions.dart';
 import 'package:advanced_clean_architecture_with_mvvm/domain/usecase/register_usecase.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/base/base_view_model.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/common/freezed_data_classes.dart';
+import 'package:advanced_clean_architecture_with_mvvm/presentation/common/state_renderer/state_renderer.dart';
+import 'package:advanced_clean_architecture_with_mvvm/presentation/common/state_renderer/state_renderer_impl.dart';
 import 'package:advanced_clean_architecture_with_mvvm/presentation/resources/strings_manager.dart';
 
 class RegisterViewModel extends BaseViewModel
@@ -28,7 +30,10 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   void start() {
-    // TODO: implement start
+    // .. we can call api if it's needed for the screen
+    // .. in our case no api when we start the register screen
+    // .. we call the content screen
+    inputState.add(ContentState());
   }
 
   @override
@@ -104,7 +109,7 @@ class RegisterViewModel extends BaseViewModel
 
   // .. profile picture
   @override
-  Stream<File> get outputIsProfilePictureValid =>
+  Stream<File> get outputIsProfilePicture =>
       _profilePictureSC.stream.map((file) => file);
 
   // ..
@@ -138,9 +143,26 @@ class RegisterViewModel extends BaseViewModel
   // .. end private functions
 
   @override
-  register() {
-    // TODO: implement register
-    throw UnimplementedError();
+  Future<void> register() async {
+    inputState.add(
+        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
+
+    (await _registerUseCase.execute(RegisterUseCaseInput(
+      registerObject.userName,
+      registerObject.countryMobileCode,
+      registerObject.mobileNumber,
+      registerObject.email,
+      registerObject.password,
+      registerObject.profilePicture,
+    )))
+        .fold(
+            (failure) => {
+                  inputState.add(ErrorState(
+                      StateRendererType.popupErrorState, failure.message))
+                }, (data) {
+      inputState.add(ContentState());
+      // .. nav to main screen
+    });
   }
 
   @override
@@ -156,6 +178,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setEmail(String email) {
+    inputEmail.add(email);
     if (isEmailValid(email)) {
       registerObject = registerObject.copyWith(email: email);
     } else {
@@ -167,6 +190,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setMobileNumber(String mobileNumber) {
+    inputMobileNumber.add(mobileNumber); 
     if (_isMobileNumberValid(mobileNumber)) {
       registerObject = registerObject.copyWith(mobileNumber: mobileNumber);
     } else {
@@ -178,6 +202,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setPassword(String password) {
+    inputPassword.add(password);
     if (_isPasswordValid(password)) {
       registerObject = registerObject.copyWith(password: password);
     } else {
@@ -189,6 +214,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setProfilePicture(File profilePicture) {
+    inputProfilePicture.add(profilePicture);
     if (profilePicture.path.isNotEmpty) {
       registerObject =
           registerObject.copyWith(profilePicture: profilePicture.path);
@@ -201,6 +227,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setUsername(String username) {
+    inputUsername.add(username);
     if (_isUsernameValid(username)) {
       // .. update register view object
 
@@ -249,6 +276,6 @@ abstract mixin class RegisterViewModelOutputs {
   Stream<String?> get outputErrorEmail;
   Stream<bool> get outputIsPasswordValid;
   Stream<String?> get outputErrorPassword;
-  Stream<File> get outputIsProfilePictureValid;
+  Stream<File> get outputIsProfilePicture;
   Stream<bool> get outputAreAllInputsValid;
 }

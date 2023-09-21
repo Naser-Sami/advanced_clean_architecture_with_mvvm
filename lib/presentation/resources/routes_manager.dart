@@ -26,6 +26,7 @@ class RoutesGenerator {
         return MaterialPageRoute(builder: (context) => const SplashView());
 
       case Routes.registerRoute:
+        initRegisterModule();
         return MaterialPageRoute(builder: (context) => const RegisterView());
 
       case Routes.loginRoute:

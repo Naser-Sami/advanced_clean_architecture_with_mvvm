@@ -33,6 +33,13 @@ class AppStrings {
   static const String resetPassword = "Reset Password";
   static const String success = "Success";
   static const String userNameInvalid = "User name should be at least 8 chars";
-  static const String mobileNumberInvalid = "Mobile Number should be at least 10 digits";
+  static const String mobileNumberInvalid =
+      "Mobile Number should be at least 10 digits";
   static const String passwordInvalid = "Password should be at least 6 digits";
+  static const String alreadyHaveAccount = "Already have an account ? Login";
+  static const String register = "Register";
+  static const String mobileNumber = "Mobile Number";
+  static const String profilePicture = "Profile picture";
+  static const String photoGallery = "Photo from gallery";
+  static const String photoCamera = "Photo from camera";
 }
